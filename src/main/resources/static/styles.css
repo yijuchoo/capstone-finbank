@@ -1,0 +1,52 @@
+.center {
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+}
+
+.right {
+  float: right;
+}
+
+table,
+td,
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+input[type="submit"] {
+  background-color: rgb(97, 97, 189);
+  color: white;
+  padding: 2px;
+  margin: 15px;
+}
+
+.gradient-text {
+  background-image: linear-gradient(45deg, #16d8f2, #fa8d07);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.disabled-input {
+  background-color: #808080;
+}
+
+.display-side-by-side {
+  display: inline-block;
+}
+
+body {
+  background-color: aliceblue;
+  /* height:100vh; */
+}
+
+footer {
+  background-color: #f0f0f0; /* Set footer background color */
+  position: absolute;
+  width: 99%;
+  text-align: center; /* Optional: Center footer content */
+  bottom: 0;
+  height: 50px; /* Set footer height */
+}

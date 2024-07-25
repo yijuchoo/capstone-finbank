@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <div class="right">
+        <span>
+            Welcome: <span sec:authentication="name">
+            </span>
+
+            <form action="/logout" class="display-side-by-side">
+                <input type="submit" value="logout">
+            </form>
+    </div>
+    <!-- <span sec:authentication="principal.authorities[0]"></span> -->
+
+
+    <div class="center">
+        <h1 class="gradient-text">User Management</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="u:${userList}">
+                    <td th:text="${u.id}"></td>
+                    <td th:text="${u.userName}"></td>
+                    <!-- <td th:text="${u.enabled}"></td> -->
+                    <!-- <td th:text="${u.userRoles}"></td> -->
+                    <td>
+                        <th:block th:each="role: ${u.userRoles}">
+                            <span th:text="${role.name}">
+                        </th:block>
+                    </td>
+                    <td>
+                        <a th:href="@{'/delete/'+${u.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a th:href="@{'/edit/'+${u.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <form action="/new" class="display-side-by-side">
+                <input type="submit" value="Add User">
+            </form>
+            <form action="/newrole" class="display-side-by-side">
+                <input type="submit" value="Add Role">
+            </form>
+
+        </div>
+    </div>
+    <footer>
+        <p>
+        <p>&copy; 2024 Dummy Bank. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
