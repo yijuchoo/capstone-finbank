@@ -2,6 +2,7 @@
   width: fit-content;
   margin: auto;
   text-align: center;
+  padding: 30px 40px;
 }
 
 .right {
@@ -17,9 +18,9 @@ th {
 }
 
 input[type="submit"] {
-  background-color: rgb(97, 97, 189);
+  /* background-color: rgb(97, 97, 189);
   color: white;
-  padding: 2px;
+  padding: 2px; */
   margin: 15px;
 }
 
@@ -27,6 +28,7 @@ input[type="submit"] {
   background-image: linear-gradient(45deg, #16d8f2, #fa8d07);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.6;
 }
 
 .disabled-input {

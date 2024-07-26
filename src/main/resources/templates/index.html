@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./styles.css">
+<head th:replace="~{components :: head}">
 </head>
 
 <body>
+  <div th:replace="~{components :: nav_admin}"></div>
 
     <div class="right">
         <span>
@@ -17,7 +13,7 @@
             </span>
 
             <form action="/logout" class="display-side-by-side">
-                <input type="submit" value="logout">
+                <input type="submit" value="logout" class="btn btn-dark btn-sm">
             </form>
     </div>
     <!-- <span sec:authentication="principal.authorities[0]"></span> -->
@@ -55,19 +51,17 @@
 
         <div sec:authorize="hasAnyAuthority('ADMIN')">
             <form action="/new" class="display-side-by-side">
-                <input type="submit" value="Add User">
+                <input type="submit" value="Add User" class="btn btn-primary">
             </form>
             <form action="/newrole" class="display-side-by-side">
-                <input type="submit" value="Add Role">
+                <input type="submit" value="Add Role" class="btn btn-primary">
             </form>
 
         </div>
     </div>
-    <footer>
-        <p>
-        <p>&copy; 2024 Dummy Bank. All rights reserved.</p>
+    <footer th:replace="~{components :: footer}">
     </footer>
-
+    <div th:replace="~{components :: scripts}"></div>
 </body>
 
 </html>
