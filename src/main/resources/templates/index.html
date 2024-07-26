@@ -13,33 +13,35 @@
 
     <div class="center">
         <h1 class="gradient-text">User Management</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>User Id</th>
-                    <th>User Name</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="u:${userList}">
-                    <td th:text="${u.id}"></td>
-                    <td th:text="${u.userName}"></td>
-                    <!-- <td th:text="${u.enabled}"></td> -->
-                    <!-- <td th:text="${u.userRoles}"></td> -->
-                    <td>
-                        <th:block th:each="role: ${u.userRoles}">
-                            <span th:text="${role.name}">
-                        </th:block>
-                    </td>
-                    <td>
-                        <a th:href="@{'/delete/'+${u.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        <a th:href="@{'/edit/'+${u.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive rounded">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="table-light">User Id</th>
+                        <th class="table-light">User Name</th>
+                        <th class="table-light">Role</th>
+                        <th class="table-light">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="u:${userList}">
+                        <td th:text="${u.id}"></td>
+                        <td th:text="${u.userName}"></td>
+                        <!-- <td th:text="${u.enabled}"></td> -->
+                        <!-- <td th:text="${u.userRoles}"></td> -->
+                        <td>
+                            <th:block th:each="role: ${u.userRoles}">
+                                <span th:text="${role.name}">
+                            </th:block>
+                        </td>
+                        <td>
+                            <a th:href="@{'/delete/'+${u.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a th:href="@{'/edit/'+${u.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div sec:authorize="hasAnyAuthority('ADMIN')">
             <form action="/new" class="display-side-by-side">
