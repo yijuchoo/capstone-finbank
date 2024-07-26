@@ -5,17 +5,9 @@
 </head>
 
 <body>
-  <div th:replace="~{components :: nav_admin}"></div>
+  <div th:replace="~{components :: nav}"></div>
 
-    <div class="right">
-        <span>
-            Welcome: <span sec:authentication="name">
-            </span>
-
-            <form action="/logout" class="display-side-by-side">
-                <input type="submit" value="logout" class="btn btn-dark btn-sm">
-            </form>
-    </div>
+    <div th:replace="~{components :: right}"></div>
     <!-- <span sec:authentication="principal.authorities[0]"></span> -->
 
 

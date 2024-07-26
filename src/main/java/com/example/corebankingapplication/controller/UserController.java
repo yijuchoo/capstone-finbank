@@ -19,6 +19,7 @@ import com.example.corebankingapplication.repo.UserRepository;
 
 
 @Controller
+// @RequestMapping("/user")
 public class UserController {
 
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

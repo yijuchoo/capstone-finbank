@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{components :: head}">
+
+<body>
+    <div th:replace="~{components :: nav}"></div>
+    <div th:replace="~{components :: right}"></div>
+    <div class="center">
+        <h2 class="gradient-text">Add Users</h2>
+        <form action="/save" th:object="${user}">
+            <table>
+                <tr>
+                    <td><label for="id">User id</label></td>
+                    <td><input class="disabled-input" type="text" th:field="*{id}" id="id" readonly></td>
+                </tr>
+                <tr>
+                    <td><label for="name">User Name</label></td>
+                    <td><input type="text" th:field="*{userName}" id="name"></td>
+                </tr>
+                <tr>
+                    <td><label for="pwd">Password</label></td>
+                    <td><input type="password" th:field="*{password}" id="pwd"></td>
+                </tr>
+                <!-- display the existing roles -->
+                <tr>
+                    <td>Roles</td>
+                    <td>
+                        <th:block th:each="role: ${listRoles}">
+                            <input type="checkbox" th:field="*{userRoles}" th:text="${role.name}" th:value="${role.id}">
+                        </th:block>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="ADD" class="btn btn-primary"></td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</body>
+
+</html>
