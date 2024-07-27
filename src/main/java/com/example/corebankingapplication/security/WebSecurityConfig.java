@@ -35,7 +35,7 @@ public class WebSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/logout", "/styles.css").permitAll()
+                        .requestMatchers("/login", "/logout", "/styles.css", "/favicon.svg").permitAll()
                         .requestMatchers("/", "/new", "/save", "/newrole", "/saverole", "/edit/*", "/delete/*")
                         .authenticated())
                 .formLogin(fl -> fl

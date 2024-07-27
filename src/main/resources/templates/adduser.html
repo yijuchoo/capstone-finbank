@@ -35,7 +35,7 @@
                         <th:block th:each="role: ${listRoles}">
                             <div class="form-check me-3"> <!-- Adds custom spacing to each checkbox -->
                                 <input type="checkbox" class="form-check-input me-1" th:field="*{userRoles}" th:text="${role.name}" th:value="${role.id}">
-                                <label class="form-check-label" th:for="*{userRoles}" th:text="${role.name}"></label>
+                                <!-- <label class="form-check-label" th:for="*{userRoles}" th:text="${role.name}"></label> -->
                             </div>
                         </th:block>
                     </div>
@@ -43,7 +43,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 d-md-block">
+                            <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
                             <input type="submit" value="ADD" class="btn btn-primary">
                         </div>
                     </td>

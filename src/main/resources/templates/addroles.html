@@ -17,7 +17,13 @@
           </tr>
           <tr>
             <td colspan="2">
-              <div class="d-grid gap-2">
+              <div class="d-grid gap-2 d-md-block">
+                <input
+                  type="button"
+                  value="BACK"
+                  class="btn btn-secondary"
+                  onclick="history.back()"
+                />
                 <input type="submit" value="ADD" class="btn btn-primary" />
               </div>
             </td>
@@ -25,8 +31,7 @@
         </table>
       </form>
     </div>
-    <footer th:replace="~{components :: footer}">
-    </footer>
+    <footer th:replace="~{components :: footer}"></footer>
     <div th:replace="~{components :: scripts}"></div>
   </body>
 </html>
