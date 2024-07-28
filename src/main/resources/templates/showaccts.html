@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{components :: head}"></head>
+
+<body>
+    <div th:replace="~{components :: nav}"></div>
+    <div th:replace="~{components :: right}"></div>
+
+    <div class="center">
+        <h1 class="gradient-text">View all Accounts</h1>
+
+        <div class="table-responsive rounded">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="table-light">Account Id</th>
+                        <th class="table-light">Account Type</th>
+                        <th class="table-light">Balance</th>
+                        <th class="table-light">Date Opened</th>
+                        <th class="table-light">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="acct : ${accounts}">
+                        <td th:text="${acct.id}"></td>
+                        <td th:text="${acct.accountType}"></td>
+                        <td th:text="${acct.balance}"></td>
+                        <td th:text="${acct.openDate}"></td>
+                        <td>
+                            <a th:href="@{/edit/{aid} (aid=${acct.id})}"><i class="fa fa-edit"
+                                    aria-hidden="true"></i></a>
+                            &nbsp;
+                            <a th:href="@{/delete/{aid} (aid=${acct.id})}"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <footer th:replace="~{components :: footer}">
+    </footer>
+    <div th:replace="~{components :: scripts}"></div>
+</body>
+
+</html>

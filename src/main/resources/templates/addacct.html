@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{components :: head}"></head>
+<body>
+    <div th:replace="~{components :: nav}"></div>
+    <div th:replace="~{components :: right}"></div>
+
+    <div class="center">
+        <h2 class="gradient-text">Add Account</h2>
+        <div class="table-responsive rounded">
+            <form action="/save">
+                <table class="table table-bordered table-hover mb-0">
+                    <tr>
+                        <td><label for="aid">Account Id</label></td>
+                        <td><input type="number" id="aid" name="aid"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="atype">Account Type</label></td>
+                        <td><input type="number" id="aid" name="aid"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="abalance">Balance</label></td>
+                        <td><input type="number" id="abalance" name="abalance"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="aopendate">Opened Date</label></td>
+                        <td><input type="datetime-local" id="aopendate" name="aopendate"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="acust">Customer</label></td>
+                        <td><input type="number" id="acust" name="acust"></td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+    <footer th:replace="~{components :: footer}">
+    </footer>
+    <div th:replace="~{components :: scripts}"></div>
+</body>
+</html>

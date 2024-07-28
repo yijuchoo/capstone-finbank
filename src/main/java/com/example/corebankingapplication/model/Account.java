@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String accountType;
     private double balance;
     private LocalDate openDate;
