@@ -1,3 +1,28 @@
+/* Define base font size */
+html {
+    font-size: 100%; /* 100% of the browser's default font size (usually 16px) */
+}
+
+body {
+  background-color: #f0f8ff !important;
+  font-size: 1rem; /* 16px */
+  /* height:100vh; */
+}
+
+/* Responsive font size */
+.font-14 {
+    font-size: 0.875rem; /* 14px */
+}
+
+.font-12 {
+    font-size: 0.75rem; /* 12px */
+}
+
+.d-flex {
+  color: #ffffff;
+  align-items: center;
+}
+
 .center {
   width: fit-content;
   margin: auto;
@@ -5,9 +30,9 @@
   padding: 30px 40px;
 }
 
-.right {
+/* .right {
   float: right;
-}
+} */
 
 /* table,
 td,
@@ -44,17 +69,15 @@ input[type="submit"] {
   display: inline-block;
 }
 
-body {
-  background-color: aliceblue;
-  /* height:100vh; */
-}
-
 footer {
   background-color: #ffffff; /* Set footer background color */
   border-top: 1px solid #dee2e6;
   position: absolute;
   width: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
   text-align: center; /* Optional: Center footer content */
+  align-items: center; /* Center vertically */
   bottom: 0;
   height: 50px; /* Set footer height */
 }
