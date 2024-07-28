@@ -1,6 +1,5 @@
 package com.example.corebankingapplication.controller;
 
-<<<<<<< HEAD
 import java.security.Principal;
 import java.util.List;
 
@@ -26,8 +25,4 @@ public class CustomerController {
         return "viewcustomers";
     }
     
-=======
-public class CustomerController {
-
->>>>>>> main
 }
