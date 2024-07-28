@@ -1,5 +1,6 @@
 package com.example.corebankingapplication.model;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -24,4 +25,8 @@ public class Account {
     private LocalDate openDate;
     @ManyToOne
     private Customer customer;
+=======
+public class Account {
+
+>>>>>>> main
 }

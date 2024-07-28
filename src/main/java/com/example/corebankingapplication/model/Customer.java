@@ -1,5 +1,6 @@
 package com.example.corebankingapplication.model;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -23,4 +24,8 @@ public class Customer {
 	private String phoneNumber;
     private String email;
     private LocalDate dob;
+=======
+public class Customer {
+
+>>>>>>> main
 }
