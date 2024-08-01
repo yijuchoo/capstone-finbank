@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{components :: head}"></head>
+
+<body>
+    <div th:replace="~{components :: nav}"></div>
+
+    <div class="center">
+        <h2 class="gradient-text">Add Account</h2>
+        <form action="/accounts/save" class="table-responsive rounded">
+            <table class="table table-bordered table-hover align-middle mb-0">
+                <tr>
+                    <td class="label"><label for="aid">Account Id</label></td>
+                    <td><input type="number" id="aid" name="aid" class="form-control form-control-sm"
+                            aria-label="Disabled input example" disabled></td>
+                    <!-- <td><input type="number" id="aid" name="aid" class="form-control form-control-sm"></td> -->
+                </tr>
+                <tr>
+                    <td class="label"><label for="atype" class="form-label">Account Type</label></td>
+                    <td>
+                        <div class="col-sm-12">
+                            <select name="atype" id="atype" class="form-select form-select-sm"
+                                aria-label="Account Type">
+                                <option value="" selected>Select Account Type</option>
+                                <option th:each="type : ${accountTypes}" th:value="${type}" th:text="${type}"></option>
+                            </select>
+                        </div>
+                    </td>
+                    <!-- <td>
+                        <select name="atype" id="atype" class="form-control form-control-sm">
+                            <option th:each="type : ${accountTypes}" th:value="${type}" th:text="${type}"></option>
+                        </select>
+                    </td> -->
+                </tr>
+                <tr>
+                    <td class="label"><label for="abalance">Balance</label></td>
+                    <td><input type="number" id="abalance" name="abalance" required
+                            class="form-control form-control-sm">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="aopendate">Opened Date</label></td>
+                    <td><input type="date" id="aopendate" name="aopendate" required
+                            class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="acust">Customer</label></td>
+                    <td>
+                        <select id="acust" name="acust" class="form-control form-control-sm">
+                            <option value="" selected>Select Customer</option>
+                            <!-- <option th:each="type : ${accountTypes}" th:value="${type}" th:text="${type}"></option> -->
+                            <option th:each="cust : ${customers}" th:value="${cust.id}"
+                                th:text="${cust.firstName + ' ' + cust.lastName}">
+                            </option>
+                        </select>
+                    </td>
+                    </td>
+                    <!-- <td><input type="number" id="acust" name="acust" required class="form-control form-control-sm"></td> -->
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="d-grid gap-2 d-md-block">
+                            <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
+                            <input type="submit" value="ADD" class="btn btn-primary">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+
+    <footer th:replace="~{components :: footer}">
+    </footer>
+    <div th:replace="~{components :: scripts}"></div>
+</body>
+
+</html>

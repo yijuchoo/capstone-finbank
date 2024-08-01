@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{components :: head}"></head>
+
+<body>
+    <div th:replace="~{components :: nav}"></div>
+    <div class="center">
+        <h2 class="gradient-text">Customers List</h2>
+
+        <div class="table-responsive rounded">
+            <table class="table table-bordered table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="table-light">ID</th>
+                        <th class="table-light">First Name</th>
+                        <th class="table-light">Last Name</th>
+                        <th class="table-light">Phone Number</th>
+                        <th class="table-light">Email</th>
+                        <th class="table-light">Date of Birth</th>
+                        <th class="table-light">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Display rows only if there are customer records -->
+                    <tr th:each="customer : ${customersList}">
+                        <td th:text="${customer.id}"></td>
+                        <td th:text="${customer.firstName}"></td>
+                        <td th:text="${customer.lastName}"></td>
+                        <td th:text="${customer.phoneNumber}"></td>
+                        <td th:text="${customer.email}"></td>
+                        <td th:text="${customer.dob}"></td>
+                        <td>
+                            <a th:href="@{/customers/edit/{id}(id=${customer.id})}"><i class="fa fa-edit"
+                                    aria-hidden="true"></i></a>
+                            <a th:href="@{/customers/delete/{id}(id=${customer.id})}"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                    <!-- Display a single row if there are no records -->
+                    <tr th:if="${#lists.isEmpty(customersList)}">
+                        <td colspan="7" class="text-center">No customer records found in database.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <a href="/customers/new" class="btn btn-primary mb-3">Add New Customer</a> -->
+        <form action="/customers/new" class="display-side-by-side">
+            <input type="submit" value="Add New Customer" class="btn btn-primary">
+        </form>
+    </div>
+    <footer th:replace="~{components :: footer}"></footer>
+    <div th:replace="~{components :: scripts}"></div>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{components :: head}">
+
+<body>
+    <div th:replace="~{components :: nav}"></div>
+    <div class="center">
+        <h2 class="gradient-text">Add Users</h2>
+        <form action="/save" th:object="${user}" class="table-responsive rounded">
+            <table class="table table-bordered table-hover align-middle mb-0">
+                <tr>
+                    <td class="label"><label for="id">User id</label></td>
+                    <td><input class="form-control form-control-sm" type="text" th:field="*{id}" id="id" aria-label="Disabled input example" disabled></td>
+                    <!-- <td><input class="disabled-input" type="text" th:field="*{id}" id="id" readonly></td> -->
+                </tr>
+                <tr>
+                    <td class="label"><label for="name">User Name</label></td>
+                    <td><input type="text" th:field="*{userName}" id="name" class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="pwd">Password</label></td>
+                    <td><input type="password" th:field="*{password}" id="pwd" class="form-control form-control-sm"></td>
+                </tr>
+                <!-- display the existing roles -->
+                <tr>
+                    <td class="label">Roles</td>
+                    <!-- <td>
+                        <th:block th:each="role: ${listRoles}">
+                            <input type="checkbox" class="form-check-input me-1" th:field="*{userRoles}" th:text="${role.name}" th:value="${role.id}">
+                        </th:block>
+                    </td> -->
+                    <td><div class="d-flex flex-row">
+                        <th:block th:each="role: ${listRoles}">
+                            <div class="form-check me-3"> <!-- Adds custom spacing to each checkbox -->
+                                <input type="checkbox" class="form-check-input me-1" th:field="*{userRoles}" th:text="${role.name}" th:value="${role.id}">
+                                <!-- <label class="form-check-label" th:for="*{userRoles}" th:text="${role.name}"></label> -->
+                            </div>
+                        </th:block>
+                    </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="d-grid gap-2 d-md-block">
+                            <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
+                            <input type="submit" value="ADD" class="btn btn-primary">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+    <footer th:replace="~{components :: footer}">
+    </footer>
+    <div th:replace="~{components :: scripts}"></div>
+</body>
+
+</html>
