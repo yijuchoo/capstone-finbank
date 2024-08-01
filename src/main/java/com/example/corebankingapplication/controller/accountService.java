@@ -1,5 +1,5 @@
 package com.example.corebankingapplication.controller;
 
-public class TransactionController {
+public class accountService {
 
 }

@@ -50,6 +50,40 @@
 
         </div>
     </div>
+
+    <div th:replace="~{components :: nav}"></div>
+    <div class="center">
+        <h1 class="gradient-text">Customer Management</h1>
+        <div class="table-responsive rounded">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="table-light">Customer ID</th>
+                        <th class="table-light">Customer Name</th>
+                        <th class="table-light">Email</th>
+                        <th class="table-light">Phone Number</th>
+                        <th class="table-light">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="customer : ${customerList}">
+                        <td th:text="${customer.id}"></td>
+                        <td th:text="${customer.firstName}"></td>
+                        <td th:text="${customer.lastName}"></td>
+                        <td th:text="${customer.phoneNumber}"></td>
+                        <td th:text="${customer.email}"></td>
+                        <td th:text="${customer.dob}"></td>
+                        <td>
+                            <a th:href="@{'/customer/edit/' + ${customer.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                            <a th:href="@{'/customer/view/' + ${customer.id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a th:href="@{'/customer/delete/' + ${customer.id}}" onclick="return confirm('Confirm this delete?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <footer th:replace="~{components :: footer}">
     </footer>
     <div th:replace="~{components :: scripts}"></div>
