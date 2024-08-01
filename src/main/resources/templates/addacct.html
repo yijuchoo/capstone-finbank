@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head th:replace="~{components :: head}"></head>
+
 <body>
     <div th:replace="~{components :: nav}"></div>
 
     <div class="center">
         <h2 class="gradient-text">Add Account</h2>
-        <div class="table-responsive rounded">
-            <form action="/accounts/save" class="table-responsive rounded">
-                <table class="table table-bordered table-hover align-middle mb-0">
-                    <tr>
-                        <td><label for="aid">Account Id</label></td>
-                        <td><input type="number" id="aid" name="aid"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="atype">Account Type</label></td>
-                        <td><input type="text" id="atype" name="atype"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="abalance">Balance</label></td>
-                        <td><input type="number" id="abalance" name="abalance"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="aopendate">Opened Date</label></td>
-                        <td><input type="datetime-local" id="aopendate" name="aopendate"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="acust">Customer</label></td>
-                        <td><input type="number" id="acust" name="acust"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" id="sadd">
-                            <input type="submit" value="Add">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        <form action="/accounts/save" class="table-responsive rounded">
+            <table class="table table-bordered table-hover align-middle mb-0">
+                <tr>
+                    <td class="label"><label for="aid">Account Id</label></td>
+                    <td><input type="number" id="aid" name="aid" class="form-control form-control-sm" aria-label="Disabled input example" disabled></td>
+                    <!-- <td><input type="number" id="aid" name="aid" class="form-control form-control-sm"></td> -->
+                </tr>
+                <tr>
+                    <td class="label"><label for="atype" class="form-label">Account Type</label></td>
+                    <td>
+                        <select name="atype" id="atype" class="form-control form-control-sm">
+                            <option th:each="type : ${accountTypes}" th:value="${type}" th:text="${type}"></option>
+                        </select>
+                    </td>
+                    <!-- <td><input type="text" id="atype" name="atype" required class="form-control form-control-sm"></td> -->
+                </tr>
+                <tr>
+                    <td class="label"><label for="abalance">Balance</label></td>
+                    <td><input type="number" id="abalance" name="abalance" required class="form-control form-control-sm">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="aopendate">Opened Date</label></td>
+                    <td><input type="datetime-local" id="aopendate" name="aopendate" required
+                            class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="acust">Customer</label></td>
+                    <td><input type="number" id="acust" name="acust" required class="form-control form-control-sm"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="d-grid gap-2 d-md-block">
+                            <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
+                            <input type="submit" value="Add" class="btn btn-primary">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
 
     </div>
 
@@ -44,4 +55,5 @@
     </footer>
     <div th:replace="~{components :: scripts}"></div>
 </body>
+
 </html>

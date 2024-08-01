@@ -8,6 +8,14 @@
     <div class="center">
         <h2 class="gradient-text">View all Accounts</h2>
 
+        <form class="d-grid gap-2 d-md-flex justify-content-md-end my-4" action="/search" method="get">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="term" />
+            <button class="btn btn-outline-primary btn-blue-700" type="submit">
+                Search
+            </button>
+
+        </form>
+
         <div class="table-responsive rounded">
             <table class="table table-bordered table-hover align-middle mb-0">
                 <thead>

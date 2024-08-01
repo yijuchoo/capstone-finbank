@@ -9,6 +9,15 @@ body {
   /* height:100vh; */
 }
 
+:root {
+  --blue-700: #094298; /*bootstrap blue 700 */
+}
+
+.btn-blue-700 {
+  background-color: var(--blue-700);
+  color: #ffffff;
+}
+
 /* Responsive font size */
 .font-14 {
     font-size: 0.875rem; /* 14px */
@@ -19,8 +28,11 @@ body {
 }
 
 .d-flex {
-  color: #ffffff;
   align-items: center;
+}
+
+.profiletop {
+  color: #ffffff;
 }
 
 .center {
@@ -28,6 +40,10 @@ body {
   margin: auto;
   text-align: center;
   padding: 30px 40px;
+}
+
+.label {
+  text-align: left;
 }
 
 /* .right {

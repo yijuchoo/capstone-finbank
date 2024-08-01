@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.corebankingapplication.model.Account;
 import com.example.corebankingapplication.model.Customer;
 import com.example.corebankingapplication.repo.AccountRepository;
+import com.example.corebankingapplication.repo.CustomerRepository;
 
 @Controller
 @RequestMapping("/accounts") // prefix to endpoints on methods /accts/list
@@ -21,6 +22,9 @@ public class AccountController {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     @RequestMapping("/list")
     public String showAccts(Model model) {
@@ -37,7 +41,12 @@ public class AccountController {
     }
 
     @RequestMapping("/add")
-    public String addAcct() {
+    public String addAcct(Model model) {
+        List<Customer> customers = customerRepository.findAll(); // Fetch all customers
+        List<String> accountTypes = List.of("Savings", "Checking", "Investment"); // Define account types
+
+        model.addAttribute("customers", customers);
+        model.addAttribute("accountTypes", accountTypes);
         return "addacct";
     }
 
