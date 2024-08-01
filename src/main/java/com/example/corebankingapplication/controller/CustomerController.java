@@ -47,13 +47,13 @@ public class CustomerController {
     @RequestMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable("id") Long id) {
         customerRepository.deleteById(id);
-        return "redirect:/customers/";
+        return "redirect:/";
     }
 
     @RequestMapping("/save")
     public String saveCustomer(Customer customer) {
         customerRepository.save(customer);
-        return "redirect:/customers/";
+        return "redirect:/customers";
     }
-    
+
 }

@@ -53,14 +53,14 @@ public class AccountController {
     /* End point for saving the account record */
     @RequestMapping("/save")
     public String saveRecord(
-            @RequestParam("aid") Long aid,
+            // @RequestParam("aid") Long aid,
             @RequestParam("atype") String atype,
             @RequestParam("abalance") double abalance,
             @RequestParam("aopendate") LocalDate aopendate,
             @RequestParam("acust") Customer customer) {
-        Account newAccount = new Account(aid, atype, abalance, aopendate, customer);
+        Account newAccount = new Account(atype, abalance, aopendate, customer);
         accountRepository.save(newAccount);
-        return "redirect:/list";
+        return "redirect:/accounts/list";
     }
 
     /* End point for editing an account */

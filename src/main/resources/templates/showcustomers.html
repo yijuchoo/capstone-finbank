@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     <!-- Display rows only if there are customer records -->
-                    <tr th:each="customer : ${customers}">
+                    <tr th:each="customer : ${customersList}">
                         <td th:text="${customer.id}"></td>
                         <td th:text="${customer.firstName}"></td>
                         <td th:text="${customer.lastName}"></td>
@@ -31,14 +31,14 @@
                         <td th:text="${customer.email}"></td>
                         <td th:text="${customer.dob}"></td>
                         <td>
-                            <a th:href="@{/customers/edit/{id}(id=${customer.id})}"
-                                class="btn btn-warning btn-sm">Edit</a>
-                            <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure?')">Delete</a>
+                            <a th:href="@{/customers/edit/{id}(id=${customer.id})}"><i class="fa fa-edit"
+                                    aria-hidden="true"></i></a>
+                            <a th:href="@{/customers/delete/{id}(id=${customer.id})}"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
                         </td>
                     </tr>
                     <!-- Display a single row if there are no records -->
-                    <tr th:if="${#lists.isEmpty(customers)}">
+                    <tr th:if="${#lists.isEmpty(customersList)}">
                         <td colspan="7" class="text-center">No customer records found in database.</td>
                     </tr>
                 </tbody>

@@ -24,4 +24,11 @@ public class Account {
     private LocalDate openDate;
     @ManyToOne
     private Customer customer;
+
+    public Account(String accountType, double balance, LocalDate openDate, Customer customer) {
+        this.accountType = accountType;
+        this.balance = balance;
+        this.openDate = openDate;
+        this.customer = customer;
+    }
 }
