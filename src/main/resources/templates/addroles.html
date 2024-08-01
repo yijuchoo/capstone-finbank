@@ -4,13 +4,12 @@
 
   <body>
     <div th:replace="~{components :: nav}"></div>
-    <div th:replace="~{components :: right}"></div>
     <div class="center">
       <h2 class="gradient-text">Add Roles</h2>
       <form action="/saverole" class="table-responsive rounded">
         <table class="table table-bordered table-hover align-middle mb-0">
           <tr>
-            <td><label for="name">Role Name</label></td>
+            <td class="label"><label for="name">Role Name</label></td>
             <td>
               <input type="text" name="name" id="name" class="form-control" />
             </td>
