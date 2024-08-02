@@ -52,8 +52,9 @@ public class CustomerController {
 
     @RequestMapping("/save")
     public String saveCustomer(Customer customer) {
+        System.out.println(customer);
         customerRepository.save(customer);
-        return "redirect:/customers";
+        return "redirect:/customers/";
     }
 
 }
