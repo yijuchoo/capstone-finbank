@@ -22,6 +22,7 @@ public class Account {
     private String accountType;
     private double balance;
     private LocalDate openDate;
+
     @ManyToOne
     private Customer customer;
 

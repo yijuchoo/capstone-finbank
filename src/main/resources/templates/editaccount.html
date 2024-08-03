@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{components :: head}"></head>
+
+<body>
+    <div th:replace="~{components :: nav}"></div>
+
+    <div class="center">
+        <h2 class="gradient-text">Edit Account</h2>
+
+        <form action="/accounts/save" class="table-responsive rounded">
+            <!-- Hidden field for account ID -->
+            <input type="hidden" name="aid" th:value="${account.id}" />
+
+            <table class="table table-bordered table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="table-light">Account Id</th>
+                        <th class="table-light">Account Type</th>
+                        <th class="table-light">Balance</th>
+                        <th class="table-light">Date Opened</th>
+                        <th class="table-light">Customer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="number" id="aid" name="aid" th:value="${account.id}"
+                                class="form-control form-control-sm" aria-label="Disabled input example" disabled>
+                        </td>
+                        <td>
+                            <select name="atype" id="atype" class="form-select form-select-sm"
+                                aria-label="Account Type">
+                                <option th:each="type : ${accountTypes}" th:value="${type}" th:text="${type}"
+                                    th:selected="${type == account.accountType}">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" id="abalance" name="abalance" th:value="${account.balance}" required
+                                class="form-control form-control-sm">
+                        </td>
+                        <td>
+                            <input type="date" id="aopendate" name="aopendate" th:value="${account.openDate}" required
+                                class="form-control form-control-sm">
+                        </td>
+                        <td>
+                            <select id="acust" name="acust" class="form-control form-control-sm">
+                                <option th:each="cust : ${customers}" th:value="${cust.id}"
+                                    th:text="${cust.firstName + ' ' + cust.lastName}"
+                                    th:selected="${cust.id == account.customer.id}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div class="d-grid gap-2 d-md-block">
+                                <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
+                                <input type="submit" value="SAVE CHANGES" class="btn btn-primary">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <footer th:replace="~{components :: footer}">
+    </footer>
+    <div th:replace="~{components :: scripts}"></div>
+</body>
+
+</html>

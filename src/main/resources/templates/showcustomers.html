@@ -23,22 +23,26 @@
                 </thead>
                 <tbody>
                     <!-- Display rows only if there are customer records -->
-                    <tr th:each="customer : ${customersList}">
-                        <td th:text="${customer.id}"></td>
-                        <td th:text="${customer.firstName}"></td>
-                        <td th:text="${customer.lastName}"></td>
-                        <td th:text="${customer.phoneNumber}"></td>
-                        <td th:text="${customer.email}"></td>
-                        <td th:text="${customer.dob}"></td>
+                    <tr th:each="c:${customerList}">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.firstName}"></td>
+                        <td th:text="${c.lastName}"></td>
+                        <td th:text="${c.phoneNumber}"></td>
+                        <td th:text="${c.email}"></td>
+                        <td th:text="${c.dob}"></td>
                         <td>
-                            <a th:href="@{/customers/edit/{id}(id=${customer.id})}"><i class="fa fa-edit"
+                            <a th:href="@{'/customers/edit/'+${c.id}}"><i class="fa fa-edit"
+                                    aria-hidden="true"></i></a>
+                            <a th:href="@{'/customers/delete/'+${c.id}}"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
+                            <!-- <a th:href="@{/customers/edit/{id}(id=${customer.id})}"><i class="fa fa-edit"
                                     aria-hidden="true"></i></a>
                             <a th:href="@{/customers/delete/{id}(id=${customer.id})}"><i class="fa fa-trash"
-                                    aria-hidden="true"></i></a>
+                                    aria-hidden="true"></i></a> -->
                         </td>
                     </tr>
                     <!-- Display a single row if there are no records -->
-                    <tr th:if="${#lists.isEmpty(customersList)}">
+                    <tr th:if="${#lists.isEmpty(customerList)}">
                         <td colspan="7" class="text-center">No customer records found in database.</td>
                     </tr>
                 </tbody>

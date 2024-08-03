@@ -22,6 +22,13 @@ public class Transaction {
     private String transType;
     private LocalDate transDate;
     private double transAmt;
+    
     @ManyToOne
     private Account account;
+
+    public Transaction(String transType, LocalDate transDate, double transAmt) {
+        this.transType = transType;
+        this.transDate = transDate;
+        this.transAmt = transAmt;
+    }
 }

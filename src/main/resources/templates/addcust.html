@@ -7,7 +7,9 @@
     <div th:replace="~{components :: nav}"></div>
 
     <div class="center">
-        <h2 class="gradient-text">Add New Customer</h2>
+        <!-- <h2 class="gradient-text">Add New Customer</h2> -->
+        <h2 th:if="${isEdit}" class="gradient-text">Edit Customer</h2>
+        <h2 th:unless="${isEdit}" class="gradient-text">Add New Customer</h2>
         <form action="/customers/save" th:object="${customer}" class="table-responsive rounded">
             <table class="table table-bordered table-hover align-middle mb-0">
                 <!-- <tr>
@@ -47,7 +49,8 @@
                     <td colspan="2">
                         <div class="d-grid gap-2 d-md-block">
                             <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
-                            <input type="submit" value="Add" class="btn btn-primary">
+                            <input th:if="${isEdit}" type="submit" value="Save" class="btn btn-primary">
+                            <input th:unless="${isEdit}" type="submit" value="Add" class="btn btn-primary">
                         </div>
                     </td>
                 </tr>

@@ -53,12 +53,12 @@ public class AccountController {
     /* End point for saving the account record */
     @RequestMapping("/save")
     public String saveRecord(
-            // @RequestParam("aid") Long aid,
+            @RequestParam("aid") Long aid, // Account ID to identify if it's an update or create
             @RequestParam("atype") String atype,
             @RequestParam("abalance") double abalance,
             @RequestParam("aopendate") LocalDate aopendate,
             @RequestParam("acust") Customer customer) {
-        Account newAccount = new Account(atype, abalance, aopendate, customer);
+        Account newAccount = new Account(aid, atype, abalance, aopendate, customer);
         accountRepository.save(newAccount);
         return "redirect:/accounts/list";
     }
@@ -67,7 +67,12 @@ public class AccountController {
     @RequestMapping("/edit/{aid}")
     public String editAcct(@PathVariable("aid") Long aid, Model model) {
         Optional<Account> account = accountRepository.findById(aid);
+        List<Customer> customers = customerRepository.findAll();
+        List<String> accountTypes = List.of("Savings", "Checking", "Investment"); // Define account types
+
         model.addAttribute("account", account.get());
+        model.addAttribute("customers", customers);
+        model.addAttribute("accountTypes", accountTypes);
         return "editaccount";
     }
 
@@ -75,7 +80,7 @@ public class AccountController {
     @RequestMapping("/delete/{aid}")
     public String deleteAcct(@PathVariable("aid") Long aid) {
         accountRepository.deleteById(aid);
-        return "redirect:/list";
+        return "redirect:/accounts/list";
     }
 
 }
