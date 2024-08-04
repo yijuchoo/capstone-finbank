@@ -1,5 +1,8 @@
 package com.example.corebankingapplication.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,7 @@ public class CustomerController {
         return "showcustomers";
     }
 
-    @RequestMapping("/new")
+    @RequestMapping("/add")
     public String addCustomer(Model model) {
         isEdit = false;
         model.addAttribute("isEdit", isEdit);
@@ -37,16 +40,21 @@ public class CustomerController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String editCustomer(@PathVariable("id") Long id, Model model) {
+    public String editCustomer(@PathVariable("id") long id, Model model) {
         isEdit = true;
-        model.addAttribute("isEdit", isEdit);
         Customer customer = customerRepository.findById(id).orElseThrow();
+        System.out.println(customer.getDob());
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formatDate = sdf.format(customer.getDob());
+        LocalDate ld = LocalDate.parse(formatDate, sdf);
+        System.out.println(ld);
+        model.addAttribute("isEdit", isEdit);
         model.addAttribute("customer", customer);
         return "addcust";
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteCustomer(@PathVariable("id") Long id, Model model) {
+    public String deleteCustomer(@PathVariable("id") long id, Model model) {
         customerRepository.deleteById(id);
         return "redirect:/customers/";
     }

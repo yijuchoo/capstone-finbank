@@ -19,8 +19,11 @@
                 </tr> -->
                 <tr>
                     <td class="label"><label for="id">Customer ID</label></td>
-                    <td><input class="form-control form-control-sm" type="text" id="id"
-                            aria-label="Disabled input example" disabled></td>
+                    <td><input th:if="${isEdit}" class="form-control form-control-sm" type="number" id="id" value="0"
+                            th:field="*{id}" aria-label="Disabled input example" readonly>
+                        <input th:unless="${isEdit}" class="form-control form-control-sm" type="number" id="id"
+                            th:value="*{id}" aria-label="Disabled input example" readonly>
+                    </td>
                 </tr>
                 <tr>
                     <td class="label"><label for="firstName">First Name</label></td>
@@ -43,7 +46,9 @@
                 </tr>
                 <tr>
                     <td class="label"><label for="dob">Date of Birth</label></td>
-                    <td><input type="date" th:field="*{dob}" id="dob" class="form-control form-control-sm"></td>
+                    <td><input type="date" th:field="*{dob}" id="dob" th:value="${dob}"
+                            class="form-control form-control-sm"></td>
+                    <!-- <td><input type="date" th:field="*{dob}" id="dob" class="form-control form-control-sm" th:attr="readonly=${isEdit}" ></td> -->
                 </tr>
                 <tr>
                     <td colspan="2">

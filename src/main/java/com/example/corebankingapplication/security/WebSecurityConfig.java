@@ -37,9 +37,14 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/logout", "/styles.css", "/favicon.svg").permitAll()
                         .requestMatchers("/", "/new", "/save", "/newrole", "/saverole", "/edit/*", "/delete/*",
-                                "/accounts/*", "/accounts/edit/*", "/accounts/delete/*", "/customers/*", "/customers/edit/*", "/customers/delete/*", "/transactions/*")
+                                "/accounts/*", "/customers/*", "/transactions/*")
                         .authenticated()
-                // Add specific authorization for Account endpoints with multiple roles
+                        // Add specific authorization for Account endpoints with multiple roles
+                        .requestMatchers("/accounts/edit/*", "/customers/edit/*")
+                        .hasAnyAuthority("ADMIN", "MANAGER", "TELLER")
+                        .requestMatchers("/accounts/delete/*", "/customers/delete/*")
+                        .hasAnyAuthority("ADMIN", "MANAGER")
+                // .requestMatchers("*/edit/*").hasAnyAuthority("ADMIN", "MANAGER", "TELLER")
                 // .requestMatchers("/accounts/*").hasAnyAuthority("GUEST", "ADMIN", "MANAGER",
                 // "TELLER")
                 // .requestMatchers("/customers/*").hasAnyAuthority("ADMIN", "MANAGER",
