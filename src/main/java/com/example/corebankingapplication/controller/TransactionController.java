@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.corebankingapplication.model.Account;
-// import com.example.corebankingapplication.model.Customer;
 import com.example.corebankingapplication.model.Transaction;
 import com.example.corebankingapplication.repo.AccountRepository;
 import com.example.corebankingapplication.repo.TransactionRepository;
@@ -29,36 +28,27 @@ public class TransactionController {
     public String showTrans(Model model) {
         List<Transaction> tranList = transactionRepository.findAll();
         model.addAttribute("transactions", tranList);
-        return "showtrans";
-    }
-
-    @RequestMapping("/search")
-    public String searchTran(@RequestParam("term") String keyword, Model model) {
-        List<Transaction> searchList = transactionRepository.search(keyword);
-        model.addAttribute("transactions", searchList);
-        return "showtrans";
+        return "showtransac";
     }
 
     @RequestMapping("/add")
-    public String addTran(Model model) {
-        List<Account> accounts = accountRepository.findAll(); // Fetch all accounts
-        List<String> transTypes = List.of("Deposits", "Withdrawal"); // Define transaction types
-
-        model.addAttribute("transTypes", transTypes);
+    public String addTrans(Model model) {
+        List<Account> accounts = accountRepository.findAll();
+        List<String> transactionTypes = List.of("Deposits", "Withrawal");
         model.addAttribute("accounts", accounts);
-        return "addtran";
+        model.addAttribute("transactionTypes", transactionTypes);
+        return "addtransac";
     }
 
-    /* End point for saving the transaction record */
     @RequestMapping("/save")
     public String saveRecord(
-            // @RequestParam("aid") Long aid,
+            @RequestParam("tid") long tid,
             @RequestParam("ttype") String ttype,
-            @RequestParam("ttransdate") LocalDate ttransdate,
-            @RequestParam("ttransamt") double ttransamt,
-            @RequestParam("tacct") Account account) {
-        // Transaction newTransaction = new Transaction(ttype, ttransdate, ttransamt, account);
-        // transactionRepository.save(newTransaction);
+            @RequestParam("tdate") LocalDate tdate,
+            @RequestParam("tamt") double tamt,
+            @RequestParam("aacct") Account account) {
+        Transaction newTransaction = new Transaction(tid, ttype, tdate, tamt, account);
+        transactionRepository.save(newTransaction);
         return "redirect:/transactions/list";
     }
 }

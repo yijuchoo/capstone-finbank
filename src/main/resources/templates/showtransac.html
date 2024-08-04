@@ -7,52 +7,47 @@
     <div th:replace="~{components :: nav}"></div>
     <div class="center">
         <h2 class="gradient-text">View all Transactions</h2>
-
         <form class="d-grid gap-2 d-md-flex justify-content-md-end my-4" action="/search">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="term" />
             <button class="btn btn-outline-primary btn-blue-700" type="submit">
                 Search
             </button>
-
         </form>
-
         <div class="table-responsive rounded">
             <table class="table table-bordered table-hover align-middle mb-0">
                 <thead>
                     <tr>
                         <th class="table-light">Transaction Id</th>
                         <th class="table-light">Transaction Type</th>
-                        <th class="table-light">Transaction Date</th>
                         <th class="table-light">Transaction Amount</th>
+                        <th class="table-light">Transaction Date</th>
                         <!-- <th class="table-light">Actions</th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="tran : ${transactions}">
-                        <td th:text="${tran.id}"></td>
-                        <td th:text="${tran.transType}"></td>
-                        <td th:text="${tran.transDate}"></td>
-                        <td th:text="${tran.transAmt}"></td>
+                    <tr th:each="trans : ${transactions}">
+                        <td th:text="${trans.id}"></td>
+                        <td th:text="${trans.transType}"></td>
+                        <td th:text="${trans.transAmt}"></td>
+                        <td th:text="${trans.transDate}"></td>
                         <!-- <td>
-                            <a th:href="@{/accounts/edit/{aid} (aid=${tran.id})}"><i class="fa fa-edit"
+                            <a th:href="@{/edit/{tid} (tid=${trans.id})}"><i class="fa fa-edit"
                                     aria-hidden="true"></i></a>
                             &nbsp;
-                            <a th:href="@{/accounts/delete/{aid} (aid=${tran.id})}"><i class="fa fa-trash"
+                            <a th:href="@{/delete/{tid} (tid=${trans.id})}"><i class="fa fa-trash"
                                     aria-hidden="true"></i></a>
                         </td> -->
                     </tr>
                     <!-- Display a single row if there are no records -->
-                    <tr th:if="${#lists.isEmpty(tranList)}">
+                    <tr th:if="${#lists.isEmpty(transactions)}">
                         <td colspan="7" class="text-center">No transaction records found in database.</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
         <form action="/transactions/add" class="display-side-by-side">
             <input type="submit" value="Add New Transaction" class="btn btn-primary">
         </form>
-
     </div>
     <footer th:replace="~{components :: footer}">
     </footer>
