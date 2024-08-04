@@ -53,7 +53,7 @@ public class AccountController {
     /* End point for saving the account record */
     @RequestMapping("/save")
     public String saveRecord(
-            @RequestParam("aid") Long aid, // Account ID to identify if it's an update or create
+            @RequestParam("aid") long aid, 
             @RequestParam("atype") String atype,
             @RequestParam("abalance") double abalance,
             @RequestParam("aopendate") LocalDate aopendate,
@@ -65,7 +65,7 @@ public class AccountController {
 
     /* End point for editing an account */
     @RequestMapping("/edit/{aid}")
-    public String editAcct(@PathVariable("aid") Long aid, Model model) {
+    public String editAcct(@PathVariable("aid") long aid, Model model) {
         Optional<Account> account = accountRepository.findById(aid);
         List<Customer> customers = customerRepository.findAll();
         List<String> accountTypes = List.of("Savings", "Checking", "Investment"); // Define account types
@@ -78,7 +78,7 @@ public class AccountController {
 
     /* End point for deleting an account record */
     @RequestMapping("/delete/{aid}")
-    public String deleteAcct(@PathVariable("aid") Long aid) {
+    public String deleteAcct(@PathVariable("aid") long aid) {
         accountRepository.deleteById(aid);
         return "redirect:/accounts/list";
     }
