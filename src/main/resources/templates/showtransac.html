@@ -7,7 +7,7 @@
     <div th:replace="~{components :: nav}"></div>
     <div class="center">
         <h2 class="gradient-text">View all Transactions</h2>
-        <form class="d-grid gap-2 d-md-flex justify-content-md-end my-4" action="/search">
+        <form class="d-grid gap-2 d-md-flex justify-content-md-end my-4" action="/transactions/search">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="term" />
             <button class="btn btn-outline-primary btn-blue-700" type="submit">
                 Search
@@ -21,6 +21,7 @@
                         <th class="table-light">Transaction Type</th>
                         <th class="table-light">Transaction Amount</th>
                         <th class="table-light">Transaction Date</th>
+                        <th class="table-light">Account Id</th>
                         <!-- <th class="table-light">Actions</th> -->
                     </tr>
                 </thead>
@@ -30,6 +31,8 @@
                         <td th:text="${trans.transType}"></td>
                         <td th:text="${trans.transAmt}"></td>
                         <td th:text="${trans.transDate}"></td>
+                        <td th:text="${trans.account.id}"></td>
+                        <!-- <td th:text="${trans.account.id + ' ' + trans.customer.firstName + trans.customer.lastName}"></td> -->
                         <!-- <td>
                             <a th:href="@{/edit/{tid} (tid=${trans.id})}"><i class="fa fa-edit"
                                     aria-hidden="true"></i></a>

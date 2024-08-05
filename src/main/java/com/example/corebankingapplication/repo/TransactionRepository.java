@@ -12,7 +12,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("select t from Transaction t where " +
             "lower(t.transType) like concat('%', lower(?1) , '%') or " +
             "concat(t.id,'') like concat('%', ?1 , '%') or " +
-            "concat(t.transAmt,'') like concat('%', ?1 , '%')")
+            "concat(t.transAmt,'') like concat('%', ?1 , '%') or " +
+            "concat(t.account.id,'') like concat('%', ?1 , '%')")
     List<Transaction> search(String searchString);
 
 }

@@ -23,10 +23,11 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
 
-    @RequestMapping("/")
+    @RequestMapping("/list")
     public String showCustomers(Model model) {
         List<Customer> customersList = customerRepository.findAll();
         model.addAttribute("customerList", customersList);
+        model.addAttribute("activePage", "customers"); // Set the active page
         return "showcustomers";
     }
 
@@ -36,6 +37,7 @@ public class CustomerController {
         model.addAttribute("isEdit", isEdit);
         // model.addAttribute("customer", customer);
         model.addAttribute("customer", new Customer());
+        model.addAttribute("activePage", "customers"); // Set the active page
         return "addcust";
     }
 
@@ -50,20 +52,21 @@ public class CustomerController {
         System.out.println(ld);
         model.addAttribute("isEdit", isEdit);
         model.addAttribute("customer", customer);
+        model.addAttribute("activePage", "customers"); // Set the active page
         return "addcust";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable("id") long id, Model model) {
         customerRepository.deleteById(id);
-        return "redirect:/customers/";
+        return "redirect:/customers/list";
     }
 
     @RequestMapping("/save")
     public String saveCustomer(Customer customer) {
         System.out.println(customer);
         customerRepository.save(customer);
-        return "redirect:/customers/";
+        return "redirect:/customers/list";
     }
 
 }

@@ -26,16 +26,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link" th:classappend="${activePage == 'home'} ? 'active' : ''" href="/">Home</a>
+              <!-- <a class="nav-link" aria-current="page" href="/">Home</a> -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/customers/">Customers</a>
+              <a class="nav-link" th:classappend="${activePage == 'customers'} ? 'active' : ''" href="/customers/list">Customers</a>
+              <!-- <a class="nav-link" href="/customers/list">Customers</a> -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/accounts/list">Accounts</a>
+              <a class="nav-link" th:classappend="${activePage == 'accounts'} ? 'active' : ''" href="/accounts/list">Accounts</a>
+              <!-- <a class="nav-link" href="/accounts/list">Accounts</a> -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/transactions/list">Transactions</a>
+              <a class="nav-link" th:classappend="${activePage == 'transactions'} ? 'active' : ''" href="/transactions/list">Transactions</a>
+              <!-- <a class="nav-link" href="/transactions/list">Transactions</a> -->
             </li>
 
             <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">

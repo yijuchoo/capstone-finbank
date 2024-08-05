@@ -28,15 +28,25 @@ public class TransactionController {
     public String showTrans(Model model) {
         List<Transaction> tranList = transactionRepository.findAll();
         model.addAttribute("transactions", tranList);
+        model.addAttribute("activePage", "transactions"); // Set the active page
         return "showtransac";
     }
 
+    @RequestMapping("/search")
+    public String searchAcct(@RequestParam("term") String keyword, Model model) {
+        List<Transaction> searchList = transactionRepository.search(keyword);
+        model.addAttribute("transactions", searchList);
+        model.addAttribute("activePage", "transactions"); // Set the active page
+        return "showtransac";
+    }
+    
     @RequestMapping("/add")
     public String addTrans(Model model) {
         List<Account> accounts = accountRepository.findAll();
         List<String> transactionTypes = List.of("Deposits", "Withrawal");
         model.addAttribute("accounts", accounts);
         model.addAttribute("transactionTypes", transactionTypes);
+        model.addAttribute("activePage", "transactions"); // Set the active page
         return "addtransac";
     }
 

@@ -30,6 +30,7 @@ public class AccountController {
     public String showAccts(Model model) {
         List<Account> acctList = accountRepository.findAll();
         model.addAttribute("accounts", acctList);
+        model.addAttribute("activePage", "accounts"); // Set the active page
         return "showaccts";
     }
 
@@ -37,6 +38,7 @@ public class AccountController {
     public String searchAcct(@RequestParam("term") String keyword, Model model) {
         List<Account> searchList = accountRepository.search(keyword);
         model.addAttribute("accounts", searchList);
+        model.addAttribute("activePage", "accounts"); // Set the active page
         return "showaccts";
     }
 
@@ -47,6 +49,7 @@ public class AccountController {
 
         model.addAttribute("customers", customers);
         model.addAttribute("accountTypes", accountTypes);
+        model.addAttribute("activePage", "accounts"); // Set the active page
         return "addacct";
     }
 
@@ -73,6 +76,7 @@ public class AccountController {
         model.addAttribute("account", account.get());
         model.addAttribute("customers", customers);
         model.addAttribute("accountTypes", accountTypes);
+        model.addAttribute("activePage", "accounts"); // Set the active page
         return "editaccount";
     }
 
