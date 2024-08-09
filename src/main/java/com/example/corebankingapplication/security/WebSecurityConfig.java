@@ -35,9 +35,9 @@ public class WebSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/logout", "/styles.css", "/favicon.svg").permitAll()
+                        .requestMatchers("/login", "/logout", "/styles.css", "/favicon.svg", "/images/*").permitAll()
                         .requestMatchers("/", "/new", "/save", "/newrole", "/saverole", "/edit/*", "/delete/*",
-                                "/accounts/*", "/customers/*", "/transactions/*")
+                                "/accounts/*", "/customers/*", "/transactions/*", "/users/*")
                         .authenticated()
                         // Add specific authorization for Account endpoints with multiple roles
                         .requestMatchers("/accounts/edit/*", "/customers/edit/*")

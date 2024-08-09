@@ -1,60 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{components :: head}">
 </head>
 
-<body>
-  <div th:replace="~{components :: nav}"></div>
-    <!-- <span sec:authentication="principal.authorities[0]"></span> -->
-
-    <div class="center">
-        <h1 class="gradient-text">User Management</h1>
-        <div class="table-responsive rounded">
-            <table class="table table-bordered table-hover mb-0">
-                <thead>
-                    <tr>
-                        <th class="table-light">User Id</th>
-                        <th class="table-light">User Name</th>
-                        <th class="table-light">Role</th>
-                        <th class="table-light">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="u:${userList}">
-                        <td th:text="${u.id}"></td>
-                        <td th:text="${u.userName}"></td>
-                        <!-- <td th:text="${u.enabled}"></td> -->
-                        <!-- <td th:text="${u.userRoles}"></td> -->
-                        <td>
-                            <th:block th:each="role: ${u.userRoles}">
-                                <span th:text="${role.name}">
-                            </th:block>
-                        </td>
-                        <td>
-                            <a th:href="@{'/edit/'+${u.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                            &nbsp;
-                            <a th:href="@{'/delete/'+${u.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<body class="index-page">
+    <div class="wrapper">
+        <div th:replace="~{components :: nav}"></div>
+        <!-- <span sec:authentication="principal.authorities[0]"></span> -->
+        <!-- Banner Section -->
+        <div class="banner">
+            <img src="/images/banner.jpg" alt="Banner Image - Woman holding a card and a smartphone">
+            <div class="bg-overlay"></div>
+            <div class="banner-content">
+                <h1>Welcome to FinBank</h1>
+                <p>Your trusted partner in financial management. Explore our features and start managing your accounts
+                    efficiently.</p>
+            </div>
         </div>
-
-        <div sec:authorize="hasAnyAuthority('ADMIN')">
-            <form action="/new" class="display-side-by-side">
-                <input type="submit" value="Add User" class="btn btn-primary">
-            </form>
-            <form action="/newrole" class="display-side-by-side">
-                <input type="submit" value="Add Role" class="btn btn-primary">
-            </form>
-
+        <div class="center">
+            <!-- <h1 class="gradient-text">Welcome to FinBank Dashboard</h1>
+            <h3>The perfect online banking experience for the desperate.</h3> -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4"> -->
+                <div class="col">
+                    <div class="card">
+                        <img src="/images/customers.jpg" class="card-img-top" alt="Smiling woman with a grocery basket">
+                        <div class="card-body">
+                            <h5 class="card-title">Customers</h5>
+                            <p class="card-text">List of customers with Add, Edit and Delete function</p>
+                            <a href="/customers/list" class="btn btn-primary me-2">View more</a>
+                            <a href="/customers/add" class="card-link">Add customer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="/images/accounts.jpg" class="card-img-top" alt="Green plant in clear glass cup">
+                        <div class="card-body">
+                            <h5 class="card-title">Accounts</h5>
+                            <p class="card-text">List of accounts with Add, Edit and Delete function</p>
+                            <a href="/accounts/list" class="btn btn-primary me-2">View more</a>
+                            <a href="/accounts/add" class="card-link">Add account</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="/images/transactions.jpg" class="card-img-top" alt="Person holding a credit card scanning against a payment device
+">
+                        <div class="card-body">
+                            <h5 class="card-title">Transactions</h5>
+                            <p class="card-text">List of transactions with Add function</p>
+                            <a href="/transactions/list" class="btn btn-primary me-2">View more</a>
+                            <a href="/transactions/add" class="card-link">New transaction</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" sec:authorize="hasAnyAuthority('ADMIN')">
+                    <div class="card">
+                        <img src="/images/users.jpg" class="card-img-top"
+                            alt="Person holding iPhone with password protected">
+                        <div class="card-body">
+                            <h5 class="card-title">Users</h5>
+                            <p class="card-text">List of users and roles with Add, Edit and Delete function</p>
+                            <a href="/users/list" class="btn btn-primary me-2">View more</a>
+                            <a href="/users/add" class="card-link">Add user</a>
+                            <a href="/users/newrole" class="card-link">Add role</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <footer th:replace="~{components :: footer}">
+        </footer>
+        <div th:replace="~{components :: scripts}"></div>
     </div>
-
-    <footer th:replace="~{components :: footer}">
-    </footer>
-    <div th:replace="~{components :: scripts}"></div>
 </body>
 
 </html>

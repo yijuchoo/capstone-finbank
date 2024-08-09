@@ -19,7 +19,7 @@ import com.example.corebankingapplication.repo.UserRepository;
 
 
 @Controller
-// @RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -30,22 +30,24 @@ public class UserController {
     @Autowired
     RoleRepository roleRepository;
 
-    @RequestMapping("/")
+    @RequestMapping("/list")
     public String showUsers(Model model, Principal principal) {
         List<User> usersList = userRepository.findAll();
         model.addAttribute("userList", usersList);
         model.addAttribute("userName", principal.getName());
         model.addAttribute("principal", principal);
-        return "index";
+        model.addAttribute("activePage", "users"); // Set the active page
+        return "showusers";
     }
 
-    @RequestMapping("/new")
+    @RequestMapping("/add")
     public String addUser(User user, Model model) {
         isEdit = false;
         model.addAttribute("isEdit", isEdit);
         model.addAttribute("user", user);
         List<Role> listRoles = roleRepository.findAll();
         model.addAttribute("listRoles", listRoles);
+        model.addAttribute("activePage", "users"); // Set the active page
         return "adduser";
     }
 
@@ -57,17 +59,19 @@ public class UserController {
         model.addAttribute("user", user);
         List<Role> listRoles = roleRepository.findAll();
         model.addAttribute("listRoles", listRoles);
+        model.addAttribute("activePage", "users"); // Set the active page
         return "adduser";
     }
 
     @RequestMapping("/delete/{id}")
     public String delUser(@PathVariable("id") Long id, Model model) {
         userRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/users/list";
     }
 
     @RequestMapping("/newrole")
-    public String addRole() {
+    public String addRole(Model model) {
+        model.addAttribute("activePage", "users"); // Set the active page
         return "addroles";
     }
 
@@ -76,14 +80,14 @@ public class UserController {
         Role newRole = new Role();
         newRole.setName(roleName);
         roleRepository.save(newRole);
-        return "redirect:/";
+        return "redirect:/users/list";
     }
 
     @RequestMapping("/save")
     public String saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "redirect:/";
+        return "redirect:/users/list";
     }
 
 }

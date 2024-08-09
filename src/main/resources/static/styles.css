@@ -1,12 +1,17 @@
 /* Define base font size */
 html {
-    font-size: 100%; /* 100% of the browser's default font size (usually 16px) */
+  font-size: 100%; /* 100% of the browser's default font size (usually 16px) */
 }
 
 body {
   background-color: #f0f8ff !important;
   font-size: 1rem; /* 16px */
   /* height:100vh; */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 :root {
@@ -20,11 +25,11 @@ body {
 
 /* Responsive font size */
 .font-14 {
-    font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem; /* 14px */
 }
 
 .font-12 {
-    font-size: 0.75rem; /* 12px */
+  font-size: 0.75rem; /* 12px */
 }
 
 .d-flex {
@@ -35,7 +40,16 @@ body {
   color: #ffffff;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .center {
+  display: block;
+  /* flex:1; */
+  /* flex: 1; */
   width: fit-content;
   margin: auto;
   text-align: center;
@@ -88,6 +102,7 @@ input[type="submit"] {
 footer {
   background-color: #ffffff; /* Set footer background color */
   border-top: 1px solid #dee2e6;
+  /* position: relative; */
   position: absolute;
   width: 100%;
   display: flex;
@@ -96,4 +111,91 @@ footer {
   align-items: center; /* Center vertically */
   bottom: 0;
   height: 50px; /* Set footer height */
+}
+
+.index-page footer {
+    position: relative; /* Set footer to be relative */
+}
+
+/* Banner Styles */
+.banner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* Center vertically */
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 340px; /* Adjust as needed */
+}
+
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0)
+  ); /* Gradient overlay */
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 5%; /* Align content to the left */
+  transform: translateY(-50%); /* Center vertically */
+  text-align: left;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+.banner-content h1 {
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+}
+
+.banner-content p {
+  font-size: 1.25rem;
+  max-width: 45%; /* Adjust this value as needed */
+  line-height: 1.6; /* Improve readability */
+}
+
+/* Responsive Banner Content */
+@media (max-width: 768px) {
+  .banner-content {
+    width: 90%;
+  }
+  .banner-content h1 {
+    font-size: 2rem;
+  }
+  .banner-content p {
+    font-size: 1rem;
+    max-width: 70%; /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-content {
+    width: 95%;
+  }
+  .banner-content h1 {
+    font-size: 1.8rem;
+  }
+  .banner-content p {
+    font-size: 1rem;
+    max-width: 80%; /* Adjust for mobile screens */
+  }
+}
+
+/* Homepage Card Styles */
+.card {
+  text-align: left;
 }
