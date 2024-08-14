@@ -40,9 +40,9 @@ public class WebSecurityConfig {
                                 "/accounts/*", "/customers/*", "/transactions/*", "/users/*")
                         .authenticated()
                         // Add specific authorization for Account endpoints with multiple roles
-                        .requestMatchers("/accounts/edit/*", "/customers/edit/*")
+                        .requestMatchers("/accounts/edit/*", "/customers/edit/*", "/users/edit/*")
                         .hasAnyAuthority("ADMIN", "MANAGER", "TELLER")
-                        .requestMatchers("/accounts/delete/*", "/customers/delete/*")
+                        .requestMatchers("/accounts/delete/*", "/customers/delete/*", "/users/delete/*")
                         .hasAnyAuthority("ADMIN", "MANAGER")
                 // .requestMatchers("*/edit/*").hasAnyAuthority("ADMIN", "MANAGER", "TELLER")
                 // .requestMatchers("/accounts/*").hasAnyAuthority("GUEST", "ADMIN", "MANAGER",

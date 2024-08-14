@@ -6,12 +6,14 @@
 <body>
     <div th:replace="~{components :: nav}"></div>
     <div class="center">
-        <h2 class="gradient-text">Add Users</h2>
-        <form action="/save" th:object="${user}" class="table-responsive rounded">
+        <!-- <h2 class="gradient-text">Add Users</h2> -->
+        <h2 th:if="${isEdit}" class="gradient-text">Edit User</h2>
+        <h2 th:unless="${isEdit}" class="gradient-text">Add New User</h2>
+        <form action="/users/save" th:object="${user}" class="table-responsive rounded">
             <table class="table table-bordered table-hover align-middle mb-0">
                 <tr>
                     <td class="label"><label for="id">User id</label></td>
-                    <td><input class="form-control form-control-sm" type="text" th:field="*{id}" id="id" aria-label="Disabled input example" disabled></td>
+                    <td><input class="form-control form-control-sm" type="text" th:field="*{id}" id="id" aria-label="Disabled input example" readonly></td>
                     <!-- <td><input class="disabled-input" type="text" th:field="*{id}" id="id" readonly></td> -->
                 </tr>
                 <tr>
@@ -44,7 +46,8 @@
                     <td colspan="2">
                         <div class="d-grid gap-2 d-md-block">
                             <input type="button" value="BACK" class="btn btn-secondary" onclick="history.back()" />
-                            <input type="submit" value="ADD" class="btn btn-primary">
+                            <input th:if="${isEdit}" type="submit" value="SAVE" class="btn btn-primary">
+                            <input th:unless="${isEdit}" type="submit" value="ADD" class="btn btn-primary">
                         </div>
                     </td>
                 </tr>

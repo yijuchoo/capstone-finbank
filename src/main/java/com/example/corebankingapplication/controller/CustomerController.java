@@ -1,10 +1,12 @@
 package com.example.corebankingapplication.controller;
 
-import java.text.SimpleDateFormat;
+// import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import com.example.corebankingapplication.repo.CustomerRepository;
 @RequestMapping("/customers")
 public class CustomerController {
 
+    Logger logger = LoggerFactory.getLogger("CustomerController.class");
+
     private boolean isEdit = false;
 
     @Autowired
@@ -28,6 +32,7 @@ public class CustomerController {
         List<Customer> customersList = customerRepository.findAll();
         model.addAttribute("customerList", customersList);
         model.addAttribute("activePage", "customers"); // Set the active page
+        logger.info("Successfully fetched {} customers", customersList.size());
         return "showcustomers";
     }
 
@@ -38,6 +43,7 @@ public class CustomerController {
         // model.addAttribute("customer", customer);
         model.addAttribute("customer", new Customer());
         model.addAttribute("activePage", "customers"); // Set the active page
+        logger.info("Displaying add customer form");
         return "addcust";
     }
 
@@ -53,12 +59,14 @@ public class CustomerController {
         model.addAttribute("isEdit", isEdit);
         model.addAttribute("customer", customer);
         model.addAttribute("activePage", "customers"); // Set the active page
+        logger.info("Editing customer with ID: {}, Date of Birth: {}", id, ld);
         return "addcust";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable("id") long id, Model model) {
         customerRepository.deleteById(id);
+        logger.info("Deleted customer with ID: {}", id);
         return "redirect:/customers/list";
     }
 
@@ -66,6 +74,7 @@ public class CustomerController {
     public String saveCustomer(Customer customer) {
         System.out.println(customer);
         customerRepository.save(customer);
+        logger.info("Saved customer: {}", customer);
         return "redirect:/customers/list";
     }
 
