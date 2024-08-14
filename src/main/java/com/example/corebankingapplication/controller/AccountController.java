@@ -35,7 +35,7 @@ public class AccountController {
         List<Account> acctList = accountRepository.findAll();
         model.addAttribute("accounts", acctList);
         model.addAttribute("activePage", "accounts"); // Set the active page
-        logger.info("Successfully fetched {} accounts", acctList.size()); // log messages
+        logger.info("Successfully fetched {} accounts", acctList.size()); // Log the number of accounts fetched
         return "showaccts";
     }
 
@@ -45,21 +45,19 @@ public class AccountController {
         List<Account> searchList = accountRepository.search(keyword);
         model.addAttribute("accounts", searchList);
         model.addAttribute("activePage", "accounts"); // Set the active page
-        logger.info("Search completed, found {} accounts", searchList.size());
+        logger.info("Search completed, found {} accounts with keyword: {}", searchList.size(), keyword);
         return "showaccts";
     }
 
     @RequestMapping("/add")
     public String addAcct(Model model) {
-        logger.info("Preparing to add a new account");
         List<Customer> customers = customerRepository.findAll(); // Fetch all customers
         List<String> accountTypes = List.of("Savings", "Checking", "Investment"); // Define account types
-
+        
         model.addAttribute("customers", customers);
         model.addAttribute("accountTypes", accountTypes);
         model.addAttribute("activePage", "accounts"); // Set the active page
-        logger.info("Displayed add account page with {} customers and {} account types", customers.size(),
-                accountTypes.size());
+        logger.info("Preparing to add new account. Customers and account types loaded.");
         return "addacct";
     }
 
@@ -71,17 +69,16 @@ public class AccountController {
             @RequestParam("abalance") double abalance,
             @RequestParam("aopendate") LocalDate aopendate,
             @RequestParam("acust") Customer customer) {
-        logger.info("Saving account with ID: {}", aid);
         Account newAccount = new Account(aid, atype, abalance, aopendate, customer);
         accountRepository.save(newAccount);
-        logger.info("Successfully saved account with ID: {}", aid);
+        logger.info("Saved new account with ID: {}, Type: {}, Balance: {}, Open Date: {}, Customer ID: {}",
+                aid, atype, abalance, aopendate, customer.getId());
         return "redirect:/accounts/list";
     }
 
     /* End point for editing an account */
     @RequestMapping("/edit/{aid}")
     public String editAcct(@PathVariable("aid") long aid, Model model) {
-        logger.info("Editing account with ID: {}", aid);
         Optional<Account> account = accountRepository.findById(aid);
         List<Customer> customers = customerRepository.findAll();
         List<String> accountTypes = List.of("Savings", "Checking", "Investment"); // Define account types
@@ -90,16 +87,15 @@ public class AccountController {
         model.addAttribute("customers", customers);
         model.addAttribute("accountTypes", accountTypes);
         model.addAttribute("activePage", "accounts"); // Set the active page
-        logger.info("Successfully retrieved account for editing with ID: {}", aid);
+        logger.info("Editing account with ID: {}", aid);
         return "editaccount";
     }
 
     /* End point for deleting an account record */
     @RequestMapping("/delete/{aid}")
     public String deleteAcct(@PathVariable("aid") long aid) {
-        logger.info("Deleting account with ID: {}", aid);
         accountRepository.deleteById(aid);
-        logger.info("Successfully deleted account with ID: {}", aid);
+        logger.info("Deleted account with ID: {}", aid);
         return "redirect:/accounts/list";
     }
 

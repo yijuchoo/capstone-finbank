@@ -3,6 +3,8 @@ package com.example.corebankingapplication.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import com.example.corebankingapplication.repo.TransactionRepository;
 @RequestMapping("/transactions")
 public class TransactionController {
 
+    Logger logger = LoggerFactory.getLogger("TransactionController.class");
+
     @Autowired
     TransactionRepository transactionRepository;
 
@@ -29,6 +33,7 @@ public class TransactionController {
         List<Transaction> tranList = transactionRepository.findAll();
         model.addAttribute("transactions", tranList);
         model.addAttribute("activePage", "transactions"); // Set the active page
+        logger.info("Successfully fetched {} transactions", tranList.size()); // log messages
         return "showtransac";
     }
 
@@ -37,6 +42,8 @@ public class TransactionController {
         List<Transaction> searchList = transactionRepository.search(keyword);
         model.addAttribute("transactions", searchList);
         model.addAttribute("activePage", "transactions"); // Set the active page
+        logger.info("Search completed, found {} transactions with keyword: {}", searchList.size(), keyword);
+        // logger.info("Search completed with keyword '{}', found {} transactions", keyword, searchList.size());
         return "showtransac";
     }
     
@@ -47,6 +54,7 @@ public class TransactionController {
         model.addAttribute("accounts", accounts);
         model.addAttribute("transactionTypes", transactionTypes);
         model.addAttribute("activePage", "transactions"); // Set the active page
+        logger.info("Preparing to add new transaction. Accounts and transaction types loaded.");
         return "addtransac";
     }
 
@@ -59,6 +67,7 @@ public class TransactionController {
             @RequestParam("aacct") Account account) {
         Transaction newTransaction = new Transaction(tid, ttype, tdate, tamt, account);
         transactionRepository.save(newTransaction);
+        logger.info("Saved new transaction with ID: {}, Type: {}, Date: {}, Amount: {}, Account ID: {}", tid, ttype, tdate, tamt, account.getId());
         return "redirect:/transactions/list";
     }
 }
