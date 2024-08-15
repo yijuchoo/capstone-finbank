@@ -1,8 +1,5 @@
 package com.example.corebankingapplication.controller;
 
-// import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -52,14 +49,10 @@ public class CustomerController {
         isEdit = true;
         Customer customer = customerRepository.findById(id).orElseThrow();
         System.out.println(customer.getDob());
-        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formatDate = sdf.format(customer.getDob());
-        LocalDate ld = LocalDate.parse(formatDate, sdf);
-        System.out.println(ld);
         model.addAttribute("isEdit", isEdit);
         model.addAttribute("customer", customer);
         model.addAttribute("activePage", "customers"); // Set the active page
-        logger.info("Editing customer with ID: {}, Date of Birth: {}", id, ld);
+        logger.info("Editing customer with ID: {}, Date of Birth: {}", id);
         return "addcust";
     }
 
