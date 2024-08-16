@@ -50,7 +50,7 @@ public class TransactionController {
     @RequestMapping("/add")
     public String addTrans(Model model) {
         List<Account> accounts = accountRepository.findAll();
-        List<String> transactionTypes = List.of("Deposits", "Withrawal");
+        List<String> transactionTypes = List.of("Deposits", "Withdrawal");
         model.addAttribute("accounts", accounts);
         model.addAttribute("transactionTypes", transactionTypes);
         model.addAttribute("activePage", "transactions"); // Set the active page
