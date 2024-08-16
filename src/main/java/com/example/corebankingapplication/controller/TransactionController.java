@@ -1,16 +1,15 @@
 package com.example.corebankingapplication.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -62,6 +61,7 @@ public class TransactionController {
         return "addtransac";
     }
 
+
     // @RequestMapping("/save")
     // public String saveRecord(
     // @RequestParam("tid") long tid,
@@ -82,7 +82,8 @@ public class TransactionController {
     public String saveRecord(
             @RequestParam("tid") long tid,
             @RequestParam("ttype") String ttype,
-            @RequestParam("tdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate tdate,
+            // @RequestParam("tdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            // LocalDate tdate,
             @RequestParam("tamt") String tamtStr,
             @RequestParam("aacct") Long accountId,
             Model model) {
@@ -112,14 +113,36 @@ public class TransactionController {
             return "addtransac";
         }
 
+        // Update the account balance based on transaction type
+        if (ttype.equalsIgnoreCase("Withdrawal")) {
+            // Check if the account has sufficient balance for withdrawal
+            if (account.getBalance() < tamt) {
+                model.addAttribute("errorMessage", "Insufficient balance. Transaction cannot be processed.");
+                return "addtransac";
+            }
+            account.setBalance(account.getBalance() - tamt);
+        } else if (ttype.equalsIgnoreCase("Deposits")) {
+            account.setBalance(account.getBalance() + tamt);
+        } else {
+            model.addAttribute("errorMessage", "Invalid transaction type.");
+            return "addtransac";
+        }
+
+        // Save the updated account balance
+        accountRepository.save(account);
+
+        // Set the transaction date to the current date and time
+        LocalDateTime tdate = LocalDateTime.now();
+
         // Create and save the new transaction
         Transaction newTransaction = new Transaction(tid, ttype, tdate, tamt, account);
+        // Transaction newTransaction = new Transaction(tid, ttype, tdate, tamt,
+        // account);
         transactionRepository.save(newTransaction);
         logger.info("Saved new transaction with ID: {}, Type: {}, Date: {}, Amount: {}, Account ID: {}",
                 tid, ttype, tdate, tamt, account.getId());
 
         return "redirect:/transactions/list";
     }
-            
-    
+
 }

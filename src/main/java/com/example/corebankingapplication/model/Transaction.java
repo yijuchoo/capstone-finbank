@@ -1,6 +1,6 @@
 package com.example.corebankingapplication.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +20,13 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String transType;
-    private LocalDate transDate;
+    private LocalDateTime transDate; // Updated to LocalDateTime
     private double transAmt;
-    
+
     @ManyToOne
     private Account account;
 
-    public Transaction(String transType, LocalDate transDate, double transAmt, Account account) {
+    public Transaction(String transType, LocalDateTime transDate, double transAmt, Account account) {
         this.transType = transType;
         this.transDate = transDate;
         this.transAmt = transAmt;
