@@ -36,10 +36,12 @@
                         <td th:text="${acct.openDate}"></td>
                         <td th:text="${acct.customer.firstName + ' ' + acct.customer.lastName}"></td>
                         <td>
-                            <a th:href="@{/accounts/edit/{aid} (aid=${acct.id})}" sec:authorize="hasAnyAuthority('ADMIN','MANAGER','TELLER')"><i class="fa fa-edit"
+                            <a th:href="@{/accounts/edit/{aid} (aid=${acct.id})}"
+                                sec:authorize="hasAnyAuthority('ADMIN','MANAGER','TELLER')"><i class="fa fa-edit"
                                     aria-hidden="true"></i></a>
                             &nbsp;
-                            <a th:href="@{/accounts/delete/{aid} (aid=${acct.id})}" sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><i class="fa fa-trash"
+                            <a th:href="@{/accounts/delete/{aid} (aid=${acct.id})}"
+                                sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><i class="fa fa-trash"
                                     aria-hidden="true"></i></a>
                         </td>
                     </tr>
@@ -54,10 +56,11 @@
         <form action="/accounts/add" class="display-side-by-side">
             <input type="submit" value="Add New Account" class="btn btn-primary">
         </form>
-
+        
     </div>
     <footer th:replace="~{components :: footer}">
     </footer>
+
     <div th:replace="~{components :: scripts}"></div>
 </body>
 

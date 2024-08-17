@@ -9,9 +9,10 @@ body {
   /* height:100vh; */
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
 :root {
@@ -40,18 +41,12 @@ html, body {
   color: #ffffff;
 }
 
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 .center {
-  display: block;
-  /* flex:1; */
-  /* flex: 1; */
+  /* display: block; */
+  display: flex;
+  flex-direction: column;
   width: fit-content;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   padding: 30px 40px;
 }
@@ -113,9 +108,9 @@ footer {
   height: 50px; /* Set footer height */
 }
 
-.index-page footer {
+  .index-page footer {
     position: relative; /* Set footer to be relative */
-}
+} 
 
 /* Banner Styles */
 .banner {
@@ -174,12 +169,22 @@ footer {
     width: 90%;
   }
   .banner-content h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .banner-content p {
     font-size: 1rem;
     max-width: 70%; /* Adjust for smaller screens */
   }
+
+  .center {
+    width: 100%;
+    padding: 24px;
+  }
+
+  footer {
+    position: absolute;
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -187,12 +192,33 @@ footer {
     width: 95%;
   }
   .banner-content h1 {
-    font-size: 1.8rem;
+    font-size: 1rem;
   }
   .banner-content p {
-    font-size: 1rem;
+    font-size: 0.875rem;
     max-width: 80%; /* Adjust for mobile screens */
   }
+
+  input.btn.btn-primary {
+    margin: 4px 0;
+  }
+
+  footer {
+    position: absolute;
+  }
+
+  th {
+    font-size: 0.875rem;
+  }
+
+  td {
+    font-size: 0.875rem;
+  }
+
+  .card-body {
+    font-size: 0.875rem;
+  }
+
 }
 
 /* Homepage Card Styles */
