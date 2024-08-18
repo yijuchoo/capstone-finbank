@@ -10,6 +10,13 @@
         <!-- <h2 class="gradient-text">Add New Customer</h2> -->
         <h2 th:if="${isEdit}" class="gradient-text">Edit Customer</h2>
         <h2 th:unless="${isEdit}" class="gradient-text">Add New Customer</h2>
+        
+        <!-- Display error messages -->
+        <div th:if="${errorMessages}" class="alert alert-danger" role="alert" th:utext="${errorMessages}">
+            <!-- Error messages will be inserted here -->
+            <p th:text="${errorMessages}"></p>
+        </div>
+
         <form action="/customers/save" th:object="${customer}" class="table-responsive rounded">
             <table class="table table-bordered table-hover align-middle mb-0">
                 <!-- <tr>
@@ -37,7 +44,7 @@
                 </tr>
                 <tr>
                     <td class="label"><label for="phoneNumber">Phone Number</label></td>
-                    <td><input type="text" th:field="*{phoneNumber}" id="phoneNumber"
+                    <td><input type="number" th:field="*{phoneNumber}" id="phoneNumber"
                             class="form-control form-control-sm"></td>
                 </tr>
                 <tr>

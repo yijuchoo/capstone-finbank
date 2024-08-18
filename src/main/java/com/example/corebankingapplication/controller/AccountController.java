@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,28 +85,41 @@ public class AccountController {
             @RequestParam("acust") Long customerId,
             Model model) {
 
-        // Validation for non-numeric values in balance
+        StringBuilder errorMessages = new StringBuilder();
+        boolean hasErrors = false;
+
+        // Validate Balance for non-numeric values
         if (!abalanceStr.matches("\\d+(\\.\\d+)?")) {
-            model.addAttribute("errorMessage", "Balance must be a numeric value.");
-            return "addacct";
+            hasErrors = true;
+            errorMessages.append("Balance must be a numeric value.\n");
         }
 
         // Parse the balance to double
-        double abalance = Double.parseDouble(abalanceStr);
-
-        // Validation for minimum balance
-        if (abalance < 100) {
-            model.addAttribute("errorMessage", "Balance must be at least $100.");
+        double abalance = 0;
+        if (hasErrors) {
+            model.addAttribute("errorMessages", errorMessages.toString());
+            logger.error("Validation errors occurred:\n{}", errorMessages.toString());
             return "addacct";
         }
 
-        // Retrieve the customer using the customer ID
-        Customer customer = customerRepository.findById(customerId)
-                .orElse(null);
+        abalance = Double.parseDouble(abalanceStr);
 
-        // If customer is not found, return with an error message
+        // Validate Minimum Balance
+        if (abalance < 100) {
+            errorMessages.append("Balance must be at least $100.\n");
+            hasErrors = true;
+        }
+
+        // Retrieve Customer
+        Customer customer = customerRepository.findById(customerId).orElse(null);
         if (customer == null) {
-            model.addAttribute("errorMessage", "Customer not found. Please select a valid customer.");
+            errorMessages.append("Customer not found. Please select a valid customer.\n");
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
+            model.addAttribute("errorMessages", errorMessages.toString());
+            logger.error("Validation errors occurred:\n{}", errorMessages.toString());
             return "addacct";
         }
 
@@ -117,6 +129,7 @@ public class AccountController {
         // Create and save the new account
         Account newAccount = new Account(aid, atype, abalance, aopendate, customer);
         accountRepository.save(newAccount);
+
         logger.info("Saved new account with ID: {}, Type: {}, Balance: {}, Open Date: {}, Customer ID: {}",
                 aid, atype, abalance, aopendate, customer.getId());
 

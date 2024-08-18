@@ -8,6 +8,13 @@
 
     <div class="center">
         <h2 class="gradient-text">Add Transaction</h2>
+
+        <!-- Display error messages -->
+        <div th:if="${errorMessages}" class="alert alert-danger" role="alert" th:utext="${errorMessages}">
+            <!-- Error messages will be inserted here -->
+            <p th:text="${errorMessages}"></p>
+        </div>
+        
         <form action="/transactions/save" class="table-responsive rounded">
             <table class="table table-bordered table-hover align-middle mb-0">
                 <tr>
@@ -68,10 +75,10 @@
             </table>
         </form>
 
-        <div th:if="${errorMessage != null}">
+        <!-- <div th:if="${errorMessage != null}">
             <p style="color:red;" th:text="${errorMessage}"></p>
         </div>
-        <form action="#" th:action="@{/save}" method="post"> <!-- Form fields here --> </form>
+        <form action="#" th:action="@{/save}" method="post"></form> -->
 
     </div>
 

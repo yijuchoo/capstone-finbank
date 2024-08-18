@@ -59,7 +59,6 @@ public class TransactionController {
         return "addtransac";
     }
 
-
     // @RequestMapping("/save")
     // public String saveRecord(
     // @RequestParam("tid") long tid,
@@ -80,49 +79,62 @@ public class TransactionController {
     public String saveRecord(
             @RequestParam("tid") long tid,
             @RequestParam("ttype") String ttype,
-            // @RequestParam("tdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            // LocalDate tdate,
             @RequestParam("tamt") String tamtStr,
             @RequestParam("aacct") Long accountId,
             Model model) {
 
-        // Validation for alphabetic and non-numeric characters
+        StringBuilder errorMessages = new StringBuilder();
+        boolean hasErrors = false;
+
+        // Validate Transaction Amount for non-numeric values
         if (!tamtStr.matches("\\d+(\\.\\d+)?")) {
-            model.addAttribute("errorMessage", "Transaction amount must be a numeric value.");
-            return "addtransac";
+            hasErrors = true;
+            errorMessages.append("Transaction amount must be a numeric value.\n");
         }
 
         // Parse the amount to double
-        double tamt = Double.parseDouble(tamtStr);
-
-        // Validation for zero or negative amounts
-        if (tamt <= 0) {
-            model.addAttribute("errorMessage", "Transaction amount must be greater than zero.");
+        double tamt = 0;
+        if (hasErrors) {
+            model.addAttribute("errorMessages", errorMessages.toString());
+            logger.error("Validation errors occurred:\n{}", errorMessages.toString());
             return "addtransac";
+        }
+
+        tamt = Double.parseDouble(tamtStr);
+
+        // Validate for zero or negative amounts
+        if (tamt <= 0) {
+            errorMessages.append("Transaction amount must be greater than zero.\n");
+            hasErrors = true;
         }
 
         // Retrieve the account using the account ID
-        Account account = accountRepository.findById(accountId)
-                .orElse(null);
+        Account account = accountRepository.findById(accountId).orElse(null);
 
         // If account is not found, return with an error message
         if (account == null) {
-            model.addAttribute("errorMessage", "Account not found. Please select a valid account.");
-            return "addtransac";
+            errorMessages.append("Account not found. Please select a valid account.\n");
+            hasErrors = true;
         }
 
         // Update the account balance based on transaction type
-        if (ttype.equalsIgnoreCase("Withdrawal")) {
-            // Check if the account has sufficient balance for withdrawal
-            if (account.getBalance() < tamt) {
-                model.addAttribute("errorMessage", "Insufficient balance. Transaction cannot be processed.");
-                return "addtransac";
-            }
-            account.setBalance(account.getBalance() - tamt);
-        } else if (ttype.equalsIgnoreCase("Deposits")) {
+        if (ttype.equalsIgnoreCase("Withdrawal") && account != null && account.getBalance() < tamt) {
+            errorMessages.append("Insufficient balance. Transaction cannot be processed.\n");
+            hasErrors = true;
+        }
+
+        if (ttype.equalsIgnoreCase("Deposits") && account != null) {
             account.setBalance(account.getBalance() + tamt);
+        } else if (ttype.equalsIgnoreCase("Withdrawal") && account != null) {
+            account.setBalance(account.getBalance() - tamt);
         } else {
-            model.addAttribute("errorMessage", "Invalid transaction type.");
+            errorMessages.append("Invalid transaction type.\n");
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
+            model.addAttribute("errorMessages", errorMessages.toString());
+            logger.error("Validation errors occurred:\n{}", errorMessages.toString());
             return "addtransac";
         }
 
@@ -134,9 +146,8 @@ public class TransactionController {
 
         // Create and save the new transaction
         Transaction newTransaction = new Transaction(tid, ttype, tdate, tamt, account);
-        // Transaction newTransaction = new Transaction(tid, ttype, tdate, tamt,
-        // account);
         transactionRepository.save(newTransaction);
+
         logger.info("Saved new transaction with ID: {}, Type: {}, Date: {}, Amount: {}, Account ID: {}",
                 tid, ttype, tdate, tamt, account.getId());
 
