@@ -38,11 +38,11 @@
                             class="form-control form-control-sm">
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td class="label"><label for="aopendate">Opened Date</label></td>
                     <td><input type="date" id="aopendate" name="aopendate" required
                             class="form-control form-control-sm"></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td class="label"><label for="acust">Customer</label></td>
                     <td>
@@ -53,7 +53,6 @@
                                 th:text="${cust.firstName + ' ' + cust.lastName}">
                             </option>
                         </select>
-                    </td>
                     </td>
                     <!-- <td><input type="number" id="acust" name="acust" required class="form-control form-control-sm"></td> -->
                 </tr>
@@ -67,6 +66,11 @@
                 </tr>
             </table>
         </form>
+
+        <div th:if="${errorMessage != null}">
+            <p style="color:red;" th:text="${errorMessage}"></p>
+        </div>
+        <form action="#" th:action="@{/save}" method="post"> <!-- Form fields here --> </form>
 
     </div>
 
