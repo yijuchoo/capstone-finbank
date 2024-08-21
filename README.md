@@ -4,6 +4,7 @@
 use the following to clone
 "git clone https://github.com/ayamzan/capstone.git"
 ===================================
+
 ABOUT
 This is a Group Capstone Project for NTUC LearningHub's Fullstack Java Developer Program
 
@@ -11,6 +12,7 @@ TECHNICAL DOCUMENTATION
 TO be Updated
 
 ===================================
+
 OBJECTIVE
 To implement a basic Online Banking Customer Portal that focus on Accounts, Customers, Transactions and Reporting modules.
 
@@ -23,6 +25,7 @@ Logging: Yes
 Database Persistence: Yes
 
 ===================================
+
 Core Banking Application
 
 This project involves the following,
