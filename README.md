@@ -6,14 +6,17 @@ use the following to clone
 ===================================
 
 ABOUT
+
 This is a Group Capstone Project for NTUC LearningHub's Fullstack Java Developer Program
 
 TECHNICAL DOCUMENTATION
-TO be Updated
+
+To be Updated
 
 ===================================
 
 OBJECTIVE
+
 To implement a basic Online Banking Customer Portal that focus on Accounts, Customers, Transactions and Reporting modules.
 
 Goal: Develop an Online Banking Customer Portal
