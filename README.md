@@ -1,4 +1,4 @@
-# capstone
+# capstone - FinBank
 <<<<<<< HEAD
 
 use the following to clone
