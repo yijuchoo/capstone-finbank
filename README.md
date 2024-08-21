@@ -1,7 +1,8 @@
 # capstone - FinBank
 <<<<<<< HEAD
 
-use the following to clone
+Backup of capstone project from following repo:
+
 "git clone https://github.com/ayamzan/capstone.git"
 ===================================
 
