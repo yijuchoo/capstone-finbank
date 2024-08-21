@@ -45,9 +45,13 @@ This project involves the following,
 3) Design and Define
 
    a. Accounts Module
+
    b. Customer Module
+
    c. Transactions Module
+
    d. Reporting Module
+
    e. Password Reset [self-help] -> NOT DONE
 
 5) Implement Customer Registration and Login/Logout Modules using OAuth2 Security.
